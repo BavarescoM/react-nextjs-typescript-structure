@@ -4,17 +4,25 @@ import Head from 'next/head'
 import RocketseatLogo from '../assets/rocketseat.svg'
 
 import { Container } from '../styles/pages/Home'
+import { useSelector, useDispatch } from 'react-redux'
+import { GameState } from '../store/createStore'
+import * as AR from '../store/modules/game/actions'
 
 const Home: React.FC = () => {
+  const VR = useSelector((state: GameState) => state.game)
+  console.log(VR)
+  const dispatch = useDispatch()
+
+  function testRedux() {
+    dispatch(AR.play())
+  }
+
   return (
     <Container>
       <Head>
         <title>Homepage</title>
+        <button onClick={() => testRedux}>disparar</button>
       </Head>
-
-      <RocketseatLogo />
-      <h1>ReactJS Structure</h1>
-      <p>A ReactJS + Next.js structure made by Rocketseat.</p>
     </Container>
   )
 }
